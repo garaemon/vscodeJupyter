@@ -3,7 +3,9 @@ import * as React from 'react';
 interface HeaderProps {
   clearResults: () => any;
   toggleAppendResults: () => any;
+  toggleScrollToBottom: () => any;
   appendResults: boolean;
+  scrollToBottom: boolean;
 }
 
 interface HeaderState {
@@ -23,6 +25,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             checked={this.props.appendResults}
             onChange={() => this.props.toggleAppendResults()} />
           Append Results
+        </label>
+        <label>
+          <input type="checkbox"
+            checked={this.props.scrollToBottom}
+            onChange={() => this.props.toggleScrollToBottom()} />
+          Scroll to the bottom
         </label>
         <button onClick={() => this.props.clearResults()}>Clear Results</button>
       </header>

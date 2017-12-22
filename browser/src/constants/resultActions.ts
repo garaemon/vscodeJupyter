@@ -1,4 +1,5 @@
 export const CLEAR_RESULTS = 'CLEAR_RESULTS';
 export const SET_APPEND_RESULTS = 'SET_APPEND_RESULTS';
+export const SET_SCROLL_TO_BOTTOM = 'SET_SCROLL_TO_BOTTOM';
 export const ADD_RESULT = 'ADD_RESULT';
 export const ADD_RESULTS = 'ADD_RESULTS';

@@ -31,6 +31,9 @@ class App extends React.Component<AppProps, AppState>{
     this.socket.on('settings.appendResults', (value: any) => {
       this.props.resultActions.setAppendResults(value);
     });
+    this.socket.on('settings.scrollToBottom', (value: any) => {
+      this.props.resultActions.setScrollToBottom(value);
+    });
     this.socket.on('clientExists', (data: any) => {
       this.socket.emit('clientExists', { id: data.id });
     });
@@ -40,11 +43,17 @@ class App extends React.Component<AppProps, AppState>{
       }
       this.socket.emit('results.ack');
       this.props.resultActions.addResults(value);
+      if (this.props.settings.scrollToBottom) {
+        window.scrollTo(0, document.body.scrollHeight);
+      }
     });
   }
 
   private toggleAppendResults() {
     this.socket.emit('settings.appendResults', !this.props.settings.appendResults);
+  }
+  private toggleScrollToBottom() {
+    this.socket.emit('settings.scrollToBottom', !this.props.settings.scrollToBottom);
   }
   private clearResults() {
     this.socket.emit('clearResults');
@@ -56,8 +65,10 @@ class App extends React.Component<AppProps, AppState>{
       <div>
         <Header
           appendResults={settings.appendResults}
+          scrollToBottom={settings.scrollToBottom}
           clearResults={() => this.clearResults()}
-          toggleAppendResults={() => this.toggleAppendResults()}>
+          toggleAppendResults={() => this.toggleAppendResults()}
+          toggleScrollToBottom={() => this.toggleScrollToBottom()}>
         </Header>
         <ResultList results={this.props.results}></ResultList>
         {children}
