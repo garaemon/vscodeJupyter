@@ -1,6 +1,7 @@
 
 export interface JupyterSettings {
     appendResults: boolean;
+    scrollToBottom: boolean;
     languages: JupyterLanguageSetting[];
 }
 

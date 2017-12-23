@@ -167,6 +167,11 @@
           "type": "boolean",
           "default": true,
           "description": "Whether to append the results to results window, else clear and display."
+		},
+		"jupyter.scrollToBottom": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to scroll to the bottom when appending the results."
         },
         "jupyter.languages": {
           "type": "array",

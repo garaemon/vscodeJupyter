@@ -129,6 +129,9 @@ export class Server extends EventEmitter {
         socket.on('settings.appendResults', (data: any) => {
             this.emit('settings.appendResults', data);
         });
+        socket.on('settings.scrollToBottom', (data: any) => {
+            this.emit('settings.scrollToBottom', data);
+        });
         socket.on('clearResults', () => {
             this.buffer = [];
         });

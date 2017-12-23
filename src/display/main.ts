@@ -46,15 +46,33 @@ export class JupyterDisplay extends vscode.Disposable {
                         });
                 });
         });
+        this.server.on('settings.scrollToBottom', append => {
+            vscode.workspace.getConfiguration('jupyter').update('scrollToBottom', append, true)
+                .then(() => {
+                    this.server.sendSetting('settings.scrollToBottom', this.scrollToBottom);
+                }, reason => {
+                    this.outputChannel.appendLine(formatErrorForLogging(reason));
+                    vscode.window.showErrorMessage('Failed to update the setting', 'View Errors')
+                        .then(item => {
+                            if (item === 'View Errors') {
+                                this.outputChannel.show();
+                            }
+                        });
+                });
+        });
         this.server.on('connected', () => {
             this.clientConnected = true;
             this.server.sendSetting('settings.appendResults', this.appendResults);
+            this.server.sendSetting('settings.scrollToBottom', this.scrollToBottom);
         });
     }
 
     private clientConnected: boolean;
     private get appendResults(): boolean {
         return vscode.workspace.getConfiguration('jupyter').get<boolean>('appendResults', true);
+    }
+    private get scrollToBottom(): boolean {
+        return vscode.workspace.getConfiguration('jupyter').get<boolean>('scrollToBottom', true);
     }
     private notebookUrl: string;
     private canShutdown: boolean;

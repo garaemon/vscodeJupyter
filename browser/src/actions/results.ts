@@ -5,3 +5,4 @@ export const clearResults = createAction(Actions.CLEAR_RESULTS);
 export const addResult = createAction<NotebookOutput>(Actions.ADD_RESULT);
 export const addResults = createAction<NotebookOutput[]>(Actions.ADD_RESULTS);
 export const setAppendResults = createAction<boolean>(Actions.SET_APPEND_RESULTS);
+export const setScrollToBottom = createAction<boolean>(Actions.SET_SCROLL_TO_BOTTOM);

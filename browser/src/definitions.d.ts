@@ -4,6 +4,7 @@ declare type NotebookOutput = {
 }
 declare interface NotebookResultSettings {
   appendResults?: boolean;
+  scrollToBottom?: boolean;
 }
 declare type NotebookResultsState = NotebookOutput[];
 
